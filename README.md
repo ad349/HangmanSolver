@@ -58,6 +58,9 @@ If the word is out-of-vocabulary (OOV) (no candidates found), the solver falls b
 Open-vocabulary priors (positional + bigrams + affix rules).
 Static letter order (etaoin…) as the absolute last resort.
 
+## Other Methods Tried
+A catboost model was trained to predict the most likely hidden letter but the model performance was not satisfactory.
+
 ## Installation ⚙️
 ```bash
 git clone https://github.com/yourusername/hangman-solver.git
