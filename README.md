@@ -112,6 +112,9 @@ Your Input:
 ```
 {"hiddenWord": "ancillary revenue", "currentWordState": "________ _______", "guessedLetters": [], "guessesRemaining": 6}
 ```
+When the model outputs the below it means that the model is ready for next word
+```{"nextGuess": "", "status": "reset"}```
+
 
 Output:
 ```
