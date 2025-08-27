@@ -2,6 +2,7 @@ import subprocess
 import json
 import statistics
 import sys
+import random
 
 # Example test set (extend to 100+ words)
 TEST_WORDS = [
@@ -1267,6 +1268,8 @@ TEST_WORDS = [
 
 ]
 
+sample = random.sample(TEST_WORDS, 100)
+
 def run_solver(word, solver_path):
     # Build initial masked state
     pattern = "".join("_" if c != " " else " " for c in word)
@@ -1320,7 +1323,7 @@ if __name__ == "__main__":
         solver_path = sys.argv[1]
 
     results = []
-    for w in TEST_WORDS:
+    for w in sample:
         res = run_solver(w, solver_path)
         results.append(res)
         if res:

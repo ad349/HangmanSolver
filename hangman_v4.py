@@ -354,6 +354,22 @@ def update_pattern(hidden_word, current_pattern, guess):
             new_pattern.append("_")
     return "".join(new_pattern)
 
+def ensure_nltk_words():
+    """
+    Ensure that the NLTK 'words' corpus is available.
+    If not, download it automatically.
+    """
+    ensure_nltk_words()
+    try:
+        from nltk.corpus import words
+        _ = words.words()[:10]  # try accessing to confirm availability
+    except LookupError:
+        print("🔽 NLTK 'words' corpus not found. Downloading...")
+        nltk.download("words")
+        from nltk.corpus import words
+        _ = words.words()[:10]
+        print("✅ NLTK 'words' corpus downloaded successfully.")
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
