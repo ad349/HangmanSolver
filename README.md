@@ -26,12 +26,31 @@ pip install -r requirements.txt
 ```
 How to run the script?
 
-Go to the working directory
->IndigoProject
+1. Go to the working directory
+2. There are 2 modes to run the script in -> auto or interactive. By default, the script runs in interactive mode - that is at each step you will have to provide the revealed letters in the hidden word / phrase. In auto mode, you provide the hidden word to the model and the model will output the guesses step by step and show final status (success or failed)
+3. The dictionary is in the data folder which is required to run the script
 
-```python .\hangman_v4.py```
+### Example:
 
-Output:
-```Hangman Solver ready.
+```python .\hangman_v4.py --dict <path-to-dictionary>```
+Above, will launch the solver in interactivve mode. The process flows like below - 
+
+```
+Hangman Solver ready.
 Example input (auto mode):
-{"hiddenWord": "ancillary revenue", "currentWordState": "________ _______", "guessedLetters": [], "guessesRemaining": 6}```
+{"hiddenWord": "ancillary revenue", "currentWordState": "________ _______", "guessedLetters": [], "guessesRemaining": 6}
+```
+
+Your Input (Initial state of hidden word):
+```
+{"currentWordState": "________ _______", "guessedLetters": [], "guessesRemaining": 6}
+```
+
+The model's output is ```{"nextGuess": "e", "status": "playing"}```
+
+Your next input in case the letter guessed is in the hidden word will be:
+```{"currentWordState": "________ _e_e__e", "guessedLetters": ["e"], "guessesRemaining": 6}```
+
+If the guess is wrong, then:
+
+```{"currentWordState": "________ _______", "guessedLetters": ["e"], "guessesRemaining": 5}```
