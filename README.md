@@ -78,6 +78,8 @@ Output:
 ### To test the model against a dataset run ```test_model.py``` for single word and ```test_model-large.py``` for hidden phrases.
 This script will return the summary stats on execution.
 
+> You can edit test_model.py to change the words / phrases to test the solver on
+
 ### Example
 ```
 PS C:\Users\USER\Desktop\IndigoProject> python .\test_model.py
@@ -197,3 +199,9 @@ Word: base maintenance     -> success in 12 guesses
   "avgGuesses": 9.666666666666666,
   "avgWrongGuesses": 3.3523809523809525
 }```
+
+## Solver Performance (Success Rate)
+
+* Single Words : 77%
+* Phrase (5-10 words) : 88%
+
