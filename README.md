@@ -6,7 +6,7 @@ It uses a mix of **information gain (EIG)**, **character priors**, **bigrams**, 
 ---
 
 ## Requirements
-*You need to install nltk and download the ```words``` corpus*
+*You need to install nltk and download the ```words``` corpus and have anaconda installed*
 
 ## Features ✈️
 - Supports **multi-word Hangman puzzles** (e.g., `"ancillary revenue"`).  
