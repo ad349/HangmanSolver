@@ -108,13 +108,13 @@ class HangmanSolver:
         remaining_letters = set(ch for w in candidates for ch in w) - guessed
         if not remaining_letters:
             remaining_letters = set(self.letters) - guessed
-        print(pattern)
-        print(remaining_letters)
+        # print(pattern)
+        # print(remaining_letters)
         best_letter, best_score = None, -1.0
         total = len(candidates)
 
         # Weights – tune later
-        α, β, γ, δ, ε, ζ = 0.4, 0.25, 0.15, 0.05, 0, 0.15
+        alpha, beta, gamma, delta, epsilon, eta = 0.4, 0.25, 0.15, 0.05, 0, 0.15
 
         for l in remaining_letters:
             # --- EIG ---
@@ -143,12 +143,12 @@ class HangmanSolver:
             affix_score = self._affix_bonus(l, pattern)
 
             # --- Combined ---
-            score = α*eig_score + β*lp + γ*pos_score + δ*left_bigram_score + ε*right_bigram_score + ζ*affix_score
+            score = alpha*eig_score + beta*lp + gamma*pos_score + delta*left_bigram_score + epsilon*right_bigram_score + eta*affix_score
             # print("letter-> ", l, "scores ->", score, eig_score, lp, pos_score, left_bigram_score, right_bigram_score, affix_score)
 
             if score > best_score:
                 best_score, best_letter = score, l
-        print(best_letter)
+        # print(best_letter)
         return best_letter
 
     # New helper for affix / orthographic bonus
@@ -260,7 +260,7 @@ class HangmanSolver:
         remaining_letters = set(self.letters) - guessed
         best_letter, best_score = None, -1.0
     
-        α, β, γ, δ, ε, ζ = 0.0, 0.2, 0.3, 0.2, 0.2, 0.1  # no EIG when OOV
+        alpha, beta, gamma, delta, epsilon, eta = 0.0, 0.2, 0.3, 0.2, 0.2, 0.1  # no EIG when OOV
     
         for l in remaining_letters:
             score = 0.0
@@ -278,9 +278,9 @@ class HangmanSolver:
                     lb = self.left_bigram.get(left, {}).get(l, 0.0)
                     rb = self.right_bigram.get(l, {}).get(right, 0.0)
     
-                    score += β*lp + γ*pp + δ*lb + ε*rb
+                    score += beta*lp + gamma*pp + gamma*lb + epsilon*rb
     
-                score += ζ * self._affix_bonus(l, w)
+                score += eta * self._affix_bonus(l, w)
     
             if score > best_score:
                 best_score, best_letter = score, l
@@ -365,7 +365,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--dict", "-d",
         type=str,
-        default="C:\\Users\\USER\\Desktop\\indigo\\data\\airlines_unique_words.txt",
+        default="C:\\Users\\USER\\Desktop\\IndigoProject\\data\\airlines_unique_words.txt",
         help="Path to airline dictionary"
     )
     args = parser.parse_args()
