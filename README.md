@@ -23,14 +23,15 @@ It uses a mix of **information gain (EIG)**, **character priors**, **bigrams**, 
 git clone https://github.com/yourusername/hangman-solver.git
 cd hangman-solver
 pip install -r requirements.txt
-
+```
 How to run the script?
 
 Go to the working directory
 >IndigoProject
 
-python .\hangman_v4.py
->
-Hangman Solver ready.
+```python .\hangman_v4.py```
+
+Output:
+```Hangman Solver ready.
 Example input (auto mode):
 {"hiddenWord": "ancillary revenue", "currentWordState": "________ _______", "guessedLetters": [], "guessesRemaining": 6}```
