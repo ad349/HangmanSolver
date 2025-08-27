@@ -18,6 +18,43 @@ It uses a mix of **information gain (EIG)**, **character priors**, **bigrams**, 
 
 ---
 
+## Solver Performance (Success Rate)
+
+* Single Words : 77%
+* Phrase (5-10 words) : 88%
+
+---
+
+## Methodology
+A dictionary which has general english words and words from airlines domain is used to do pattern matching against, this dictionary was created by combing various online airlines sources (abbreviations, pdfs, common terms etc.) and words corpus from nltk. The model tries to pick the best guess by calculating a cumulative score of each candidate letter which provide maximim information gain and has highest context related probability. The weights were tuned by running grid search using n-fold cross validation on airlines domain specific words.
+
+1. Dictionary Construction
+The solver relies on a hybrid dictionary that combines:
+  * General English words from the NLTK corpus.
+  * Airline and aviation-specific terms compiled from various sources (PDFs, regulatory docs, common abbreviations, manuals, and domain-specific glossaries).
+This ensures the solver can handle both everyday words and technical aviation vocabulary.
+
+2. Candidate Filtering
+For every partially revealed word (e.g., a__ro_la_e), the solver uses regex-based pattern matching to filter down possible candidates from the dictionary.
+Words that conflict with already-guessed letters are removed.
+
+3.Letter Scoring
+For each candidate letter, multiple features are considered:
+* Expected Information Gain (EIG): Chooses the letter that reduces the candidate set most effectively.
+* Letter Priors: Frequency of a letter in the entire dictionary.
+* Positional Priors: Likelihood of a letter appearing at a given position for words of similar length.
+* Bigrams (Left/Right Context): Probability of a letter appearing next to already-known neighbors.
+* Affix & Orthographic Heuristics: Proactive rules that reward letters that could complete common suffixes (-ing, -tion, -ed) or prefixes (pre-, dis-), as well as special cases (q → u, double consonants, etc.).
+
+4. Weighted Scoring
+Each feature contributes to a cumulative score, with weights tuned using grid search with n-fold cross validation on the aviation-specific dictionary.
+The solver selects the letter with the highest combined score.
+
+5. Fallbacks
+If the word is out-of-vocabulary (OOV) (no candidates found), the solver falls back to:
+Open-vocabulary priors (positional + bigrams + affix rules).
+Static letter order (etaoin…) as the absolute last resort.
+
 ## Installation ⚙️
 ```bash
 git clone https://github.com/yourusername/hangman-solver.git
@@ -198,10 +235,8 @@ Word: base maintenance     -> success in 12 guesses
   "successRate": 0.7714285714285715,
   "avgGuesses": 9.666666666666666,
   "avgWrongGuesses": 3.3523809523809525
-}```
+}
+```
 
-## Solver Performance (Success Rate)
 
-* Single Words : 77%
-* Phrase (5-10 words) : 88%
 
