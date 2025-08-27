@@ -71,7 +71,7 @@ How to run the script?
 
 1. Go to the working directory
 2. There are 2 modes to run the script in -> auto or interactive. By default, the script runs in interactive mode - that is at each step you will have to provide the revealed letters in the hidden word / phrase. In auto mode, you provide the hidden word to the model and the model will output the guesses step by step and show final status (success or failed)
-3. The dictionary is in the data folder which is required to run the script
+3. The dictionary ```airlines_unique_words``` is in the data folder which is required to run the script
 
 ### Example:
 
